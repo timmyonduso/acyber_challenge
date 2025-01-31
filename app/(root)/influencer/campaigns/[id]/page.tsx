@@ -62,14 +62,14 @@ export default function CampaignDetailsPage() {
   if (loading) return <p>Loading...</p>;
 
   return campaign ? (
-    <div className="max-w-2xl mx-auto p-6">
-      <Card>
+    <div className="max-w-2xl mx-auto p-6 bg-gray-900 text-white">
+      <Card className="bg-gray-800">
         <CardContent className="p-6">
           <CardTitle>{campaign.title}</CardTitle>
-          <CardDescription className="mt-2">{campaign.description}</CardDescription>
+          <CardDescription className="mt-2 text-gray-400">{campaign.description}</CardDescription>
           <div className="mt-4">
             <p className="font-semibold">Instructions:</p>
-            <p className="text-gray-600">{campaign.instructions}</p>
+            <p className="text-gray-300">{campaign.instructions}</p>
           </div>
           <div className="mt-4">
             <p className="font-semibold">Deadline:</p>
@@ -77,19 +77,19 @@ export default function CampaignDetailsPage() {
           </div>
         </CardContent>
       </Card>
-
+  
       {/* Submission Form */}
-      <div className="mt-6 p-6 bg-gray-50 rounded-lg">
-        <h2 className="text-lg font-bold">Submit Your Content</h2>
+      <div className="mt-6 p-6 bg-gray-800 rounded-lg">
+        <h2 className="text-lg font-bold text-white">Submit Your Content</h2>
         <Input
           type="url"
           placeholder="Enter content URL (TikTok, Instagram, etc.)"
           value={contentUrl}
           onChange={(e) => setContentUrl(e.target.value)}
-          className="mt-2"
+          className="mt-2 bg-gray-700 text-white placeholder-gray-400"
         />
         <Button
-          className="mt-4"
+          className="mt-4 bg-blue-600 hover:bg-blue-700 text-white"
           onClick={handleSubmit}
           disabled={submitting || !contentUrl}
         >
@@ -101,4 +101,4 @@ export default function CampaignDetailsPage() {
   ) : (
     <p className="text-gray-500">Campaign not found.</p>
   );
-}
+}  

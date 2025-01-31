@@ -1,6 +1,6 @@
 'use client';
 
-import { SubmissionCard } from "@/components/campaigns/SubmissionCard";
+import SubmissionCard from "@/components/campaigns/SubmissionCard";
 import { useEffect, useState } from "react";
 
 interface Submission {

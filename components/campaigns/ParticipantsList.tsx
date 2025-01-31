@@ -53,7 +53,7 @@ export function ParticipantsList({ participants, submissions, campaignId }: Part
   }
 
   return (
-    <Card>
+    <Card className="bg-gray-800 text-white">
       <CardHeader>
         <CardTitle>Influencers</CardTitle>
         <div className="flex items-center space-x-2">
@@ -63,32 +63,35 @@ export function ParticipantsList({ participants, submissions, campaignId }: Part
             placeholder="Search influencers..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="max-w-sm"
+            className="max-w-sm bg-gray-700 text-white placeholder-gray-400"
           />
         </div>
       </CardHeader>
       <CardContent>
-        <Table>
+        <Table className="bg-gray-800">
           <TableHeader>
             <TableRow>
-              <TableHead>Influencer ID</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Submissions</TableHead>
-              <TableHead>Last Submission</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead className="text-gray-400">Influencer ID</TableHead>
+              <TableHead className="text-gray-400">Status</TableHead>
+              <TableHead className="text-gray-400">Submissions</TableHead>
+              <TableHead className="text-gray-400">Last Submission</TableHead>
+              <TableHead className="text-gray-400">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredParticipants.map((participant) => (
-              <TableRow key={participant._id}>
-                <TableCell className="font-medium">
+              <TableRow key={participant._id} className="bg-gray-700">
+                <TableCell className="font-medium text-gray-300">
                   <div className="flex items-center space-x-2">
                     <User className="text-gray-400" />
                     <span>{participant.influencerId}</span>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <Badge variant={participant.status === "completed" ? "destructive" : "default"}>
+                  <Badge
+                    variant={participant.status === "completed" ? "destructive" : "default"}
+                    className={participant.status === "completed" ? "bg-red-600" : "bg-gray-600"}
+                  >
                     {participant.status}
                   </Badge>
                 </TableCell>
@@ -100,7 +103,12 @@ export function ParticipantsList({ participants, submissions, campaignId }: Part
                   </div>
                 </TableCell>
                 <TableCell>
-                  <Button variant="outline" size="sm" onClick={() => handleViewSubmissions(participant.influencerId)}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleViewSubmissions(participant.influencerId)}
+                    className="text-gray-700 border-gray-500 hover:bg-gray-600"
+                  >
                     <Eye className="w-4 h-4 mr-2" />
                     View Submissions
                   </Button>
@@ -112,5 +120,6 @@ export function ParticipantsList({ participants, submissions, campaignId }: Part
       </CardContent>
     </Card>
   )
+  
 }
 

@@ -44,24 +44,24 @@ export function SubmissionsList({ submissions, campaignId, influencerId }: Submi
   }
 
   return (
-    <Card>
+    <Card className="bg-gray-800 text-white">
       <CardHeader>
-        <CardTitle>Submissions for Influencer {influencerId}</CardTitle>
+        <CardTitle className="text-white">Submissions for Influencer {influencerId}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Table>
+        <Table className="bg-gray-800 text-white">
           <TableHeader>
             <TableRow>
-              <TableHead>Submission Date</TableHead>
-              <TableHead>Content URL</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead className="text-gray-400">Submission Date</TableHead>
+              <TableHead className="text-gray-400">Content URL</TableHead>
+              <TableHead className="text-gray-400">Status</TableHead>
+              <TableHead className="text-gray-400">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {submissions.map((submission) => (
-              <TableRow key={submission._id}>
-                <TableCell>
+              <TableRow key={submission._id} className="bg-gray-700">
+                <TableCell className="text-gray-300">
                   <div className="flex items-center space-x-2">
                     <Calendar className="text-gray-400" />
                     <span>{new Date(submission.submittedAt).toLocaleDateString()}</span>
@@ -72,7 +72,7 @@ export function SubmissionsList({ submissions, campaignId, influencerId }: Submi
                     href={submission.contentUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
+                    className="text-blue-400 hover:underline"
                   >
                     View Content
                   </a>
@@ -86,6 +86,7 @@ export function SubmissionsList({ submissions, campaignId, influencerId }: Submi
                           ? "destructive"
                           : "default"
                     }
+                    className={submissionStatuses[submission._id] === "approved" ? "bg-green-600" : submissionStatuses[submission._id] === "rejected" ? "bg-red-600" : "bg-gray-600"}
                   >
                     {submissionStatuses[submission._id]}
                   </Badge>
@@ -97,6 +98,7 @@ export function SubmissionsList({ submissions, campaignId, influencerId }: Submi
                       size="sm"
                       onClick={() => handleStatusUpdate(submission._id, "approved")}
                       disabled={submissionStatuses[submission._id] !== "pending"}
+                      className="text-gray-300 border-gray-500 hover:bg-gray-600"
                     >
                       <CheckCircle className="w-4 h-4 mr-2" />
                       Approve
@@ -106,6 +108,7 @@ export function SubmissionsList({ submissions, campaignId, influencerId }: Submi
                       size="sm"
                       onClick={() => handleStatusUpdate(submission._id, "rejected")}
                       disabled={submissionStatuses[submission._id] !== "pending"}
+                      className="text-gray-300 border-gray-500 hover:bg-gray-600"
                     >
                       <XCircle className="w-4 h-4 mr-2" />
                       Reject
@@ -119,5 +122,6 @@ export function SubmissionsList({ submissions, campaignId, influencerId }: Submi
       </CardContent>
     </Card>
   )
+  
 }
 

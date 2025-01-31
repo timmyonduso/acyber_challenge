@@ -65,46 +65,61 @@ export default function AllCampaignsPage() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">All Campaigns</h1>
+      <h1 className="text-2xl font-bold mb-4 text-white">All Campaigns</h1>
       {loading ? (
-        <p>Loading campaigns...</p>
+        <p className="text-gray-400">Loading campaigns...</p>
       ) : campaigns.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {campaigns.map((campaign) => (
-            <Card key={campaign._id} className="hover:shadow-lg transition">
+            <Card
+              key={campaign._id}
+              className="bg-gray-900 border border-gray-800 text-white hover:shadow-lg hover:shadow-gray-700 transition"
+            >
               <CardContent className="p-4">
-                <CardTitle className="flex justify-between">
+                <CardTitle className="flex justify-between text-gray-200">
                   {campaign.title}
                   <span
                     className={`px-2 py-1 text-sm rounded-md ${
-                      campaign.status === "active" ? "bg-green-500 text-white" : "bg-gray-400 text-white"
+                      campaign.status === "active"
+                        ? "bg-green-600 text-white"
+                        : "bg-gray-500 text-white"
                     }`}
                   >
                     {campaign.status}
                   </span>
                 </CardTitle>
-                <CardDescription className="mt-2 text-gray-600">{campaign.description}</CardDescription>
+                <CardDescription className="mt-2 text-gray-400">
+                  {campaign.description}
+                </CardDescription>
                 <div className="mt-4 flex items-center text-sm text-gray-500">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Deadline: {new Date(campaign.deadline).toLocaleDateString()}
+                  <Calendar className="w-4 h-4 mr-2 text-gray-400" />
+                  Deadline:{" "}
+                  <span className="text-gray-300">
+                    {new Date(campaign.deadline).toLocaleDateString()}
+                  </span>
                 </div>
                 <div className="mt-4 flex justify-between">
                   <Button
                     variant="default"
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
                     onClick={() => handleJoinCampaign(campaign._id)}
                     disabled={joining === campaign._id}
                   >
                     {joining === campaign._id ? (
                       <>
-                        <CheckCircle className="w-4 h-4 animate-spin mr-2" />
+                        <CheckCircle className="w-4 h-4 animate-spin mr-2 text-white" />
                         Joining...
                       </>
                     ) : (
                       "Join Campaign"
                     )}
                   </Button>
-                  <Button variant="outline" onClick={() => handleViewParticipants(campaign._id)}>
-                    <Users className="w-4 h-4 mr-2" />
+                  <Button
+                    variant="outline"
+                    className="border-gray-600 text-gray-800 hover:bg-gray-800"
+                    onClick={() => handleViewParticipants(campaign._id)}
+                  >
+                    <Users className="w-4 h-4 mr-2 text-gray-800 hover:text-gray-300" />
                     View Participants
                   </Button>
                 </div>
@@ -113,9 +128,10 @@ export default function AllCampaignsPage() {
           ))}
         </div>
       ) : (
-        <p className="text-gray-500">No campaigns available.</p>
+        <p className="text-gray-400">No campaigns available.</p>
       )}
     </div>
-  )
+  );
+  
 }
 
